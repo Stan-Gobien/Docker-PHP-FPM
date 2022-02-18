@@ -4,3 +4,8 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 
 RUN IPE_GD_WITHOUTAVIF=1 && chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions gd gettext mysqli apcu exif mcrypt
+
+RUN apt-get update &&  \
+    DEBIAN_FRONTEND=noninteractive apt-get -qq install msmtp && \
+    apt-get clean && \
+    echo 'sendmail_path="/usr/bin/msmtp --host smtp.telenet.be --port 25 --from=docker-`id -u` -ti"' > /usr/local/etc/php/conf.d/mail.ini
