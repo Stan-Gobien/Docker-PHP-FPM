@@ -1,9 +1,7 @@
 FROM php:8-fpm
 
-RUN apt-get update &&  \
-    DEBIAN_FRONTEND=noninteractive apt-get -qq install msmtp && \
-    apt-get clean
-
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install msmtp
+    
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 RUN IPE_GD_WITHOUTAVIF=1 && chmod +x /usr/local/bin/install-php-extensions && \
