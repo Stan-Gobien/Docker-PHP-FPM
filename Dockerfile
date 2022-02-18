@@ -1,5 +1,7 @@
 FROM php:8-fpm
 
+RUN echo nameserver 1.1.1.1 > /etc/resolv.conf
+
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install msmtp
     
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
